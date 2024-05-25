@@ -1,0 +1,51 @@
+version: '3.1'
+services:
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 'nodeseeklite-webserver'
+    ports:
+      - ${WEBSERVER:-15100}:5000
+    working_dir: /nodeseeklite_data
+    volumes:
+      - ./nodeseeklite_data:/nodeseeklite_data
+    restart: always
+    command: [
+      'gunicorn',
+      '--log-level=INFO',
+      '--capture-output',
+      '--access-logfile','-',
+      '--error-logfile', '-',
+      '-b', '0.0.0.0:5000',
+      '-k', 'gevent',
+      '-w', '1',
+      '-t', '30',
+      'nodeseeklite.app:app'
+    ]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: "10"
+  task:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 'nodeseeklite-task'
+    working_dir: /nodeseeklite_data
+    volumes:
+      - ./nodeseeklite_data:/nodeseeklite_data
+    restart: always
+    command: [ 'nodeseeklite', 'task' ]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: "10"
+
+# docker-compose pull
+
+# docker-compose build
+
+# docker-compose down && docker-compose up -d
