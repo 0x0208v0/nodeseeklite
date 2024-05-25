@@ -11,6 +11,10 @@ MJJ最热闹的论坛：NodeSeek “Lite” 版它来啦～
 1. （重要紧急）加入按用户屏蔽相关功能
 1. （重要紧急）加入按关键字屏蔽相关功能
 
+## 页面展示
+
+![](https://img.erpweb.eu.org/imgs/2024/05/7010af3cffec3af6.png)
+
 ## 如何本地启动？
 
 首先，确保本机已经安装 docker 和 docker-compose 软件
