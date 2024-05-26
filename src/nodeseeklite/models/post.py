@@ -5,6 +5,7 @@ from typing import Self
 import arrow
 import feedparser
 import pendulum
+import requests
 from sqlalchemy import DateTime
 from sqlalchemy import Index
 from sqlalchemy import String
@@ -104,7 +105,12 @@ class Post(BaseModel):
     @classmethod
     def fetch_post_list(cls) -> list[Self]:
         post_list = []
-        result = feedparser.parse('https://rss.nodeseek.com')
+
+        url = 'https://rss.nodeseek.com'
+        headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:95.0) Gecko/20100101 Firefox/95.0'}
+        response = requests.get(url, headers=headers, timeout=(5, 6))
+
+        result = feedparser.parse(response.content)
         for entry in result['entries']:
             post = cls(
                 url=entry['link'],
