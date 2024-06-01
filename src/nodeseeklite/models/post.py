@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from datetime import timedelta
 from typing import Self
 
 import arrow
@@ -95,12 +96,16 @@ class Post(BaseModel):
         return time_ago(self.published_at)
 
     @property
+    def display_time(self) -> str:
+        return (self.published_at + timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S')
+
+    @property
     def tag_url(self) -> str:
         return make_tag_url(self.tag)
 
     @property
     def tag_zh(self) -> str:
-        return TAG_ZH_MAP.get(self.tag, '未知tag')
+        return TAG_ZH_MAP.get(self.tag, '未知')
 
     @classmethod
     def fetch_post_list(cls) -> list[Self]:

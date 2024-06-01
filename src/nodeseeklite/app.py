@@ -14,6 +14,9 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__, instance_path=os.getcwd())
 app.config.update(config.model_dump())
 
+app.json.ensure_ascii = False
+app.json.mimetype = "application/json; charset=utf-8"
+
 register_models(app)
 register_blueprints(app)
 
