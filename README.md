@@ -53,4 +53,12 @@ MJJ最热闹的论坛：NodeSeek “Lite” 版它来啦～
 
 ### nodeseeklite Web 页面：
 
-默认地址：http://localhost:15100/    
+默认地址：http://localhost:15100/
+
+### nodeseeklite API ：
+
+浏览器访问：http://localhost:15100/api
+
+或者
+
+命令行输入 `curl http://localhost:15100/api `
