@@ -4,9 +4,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: nodeseeklite
     container_name: 'nodeseeklite-webserver'
     ports:
-      - ${WEBSERVER:-15100}:5000
+      - ${WEBSERVER_PORT:-15100}:5000
     working_dir: /nodeseeklite_data
     volumes:
       - ./nodeseeklite_data:/nodeseeklite_data
@@ -19,7 +20,7 @@ services:
       '--error-logfile', '-',
       '-b', '0.0.0.0:5000',
       '-k', 'gevent',
-      '-w', '1',
+      '-w', '2',
       '-t', '30',
       'nodeseeklite.app:app'
     ]
@@ -32,6 +33,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: nodeseeklite
     container_name: 'nodeseeklite-task'
     working_dir: /nodeseeklite_data
     volumes:

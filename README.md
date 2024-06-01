@@ -61,4 +61,4 @@ MJJ最热闹的论坛：NodeSeek “Lite” 版它来啦～
 
 或者
 
-命令行输入 `curl http://localhost:15100/api `
+命令行输入 `curl http://localhost:15100/api`
